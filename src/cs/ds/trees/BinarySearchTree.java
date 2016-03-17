@@ -180,6 +180,42 @@ public class BinarySearchTree {
 		System.out.print(", ");
 	}
 	
+	public boolean valueExists(int data){
+		return valueExists(this.rootNode, data);
+	}
+	
+	private boolean valueExists(Node rootNode, int data){
+		while(rootNode != null){
+			if(rootNode.getData() == data){
+				return true;
+			} else {
+				if(rootNode.getData() > data){
+					rootNode = rootNode.getLeftNode();
+				} else {
+					rootNode = rootNode.getRightNode();
+				}
+			}
+		}
+		return false;
+	}
+	
+	public void printRootToLeaf(){
+		printRootToLeaf(this.rootNode, "");
+	}
+	
+	private void printRootToLeaf(Node rootNode, String previousValue){
+		
+		if(rootNode.getLeftNode()!=null){
+			printRootToLeaf(rootNode.getLeftNode(), previousValue + rootNode.getData()+ ", ");
+		}
+		if(rootNode.getRightNode()!=null){
+			printRootToLeaf(rootNode.getRightNode(), previousValue + rootNode.getData()+ ", ");
+		}
+		if(rootNode.getLeftNode() == null && rootNode.getRightNode()==null){
+			System.out.println(previousValue+rootNode.getData());
+		}
+	}
+	
 	public static void main(String[] args) {
 
 		BinarySearchTree binaryTree = new BinarySearchTree();
@@ -208,7 +244,10 @@ public class BinarySearchTree {
 		binaryTree.printDescending();
 		System.out.println();
 		binaryTree.printPostOrder();
+		System.out.println();
+		System.out.print(binaryTree.valueExists(0));
+		System.out.println();
+		binaryTree.printRootToLeaf();
 	}
 
 }
-

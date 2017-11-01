@@ -219,7 +219,7 @@ public class BinarySearchTree {
 	public static void main(String[] args) {
 
 		BinarySearchTree binaryTree = new BinarySearchTree();
-		binaryTree.add(7);
+		/*binaryTree.add(7);
 		binaryTree.add(6);
 		binaryTree.add(8);
 		binaryTree.add(3);
@@ -235,7 +235,15 @@ public class BinarySearchTree {
 		binaryTree.add(15);
 		binaryTree.add(1);
 		binaryTree.add(4);
-		
+		*/
+
+		binaryTree.add(5);
+		binaryTree.add(3);
+		binaryTree.add(2);
+		binaryTree.add(4);
+		binaryTree.add(9);
+		binaryTree.add(6);
+		binaryTree.add(11);
 		System.out.println("Size of this node is : "+binaryTree.size());
 		System.out.println("Max depth is : " + binaryTree.maxDepth());
 		System.out.println("Min Value is : " + binaryTree.minValue());
@@ -248,6 +256,27 @@ public class BinarySearchTree {
 		System.out.print(binaryTree.valueExists(0));
 		System.out.println();
 		binaryTree.printRootToLeaf();
+
+		BinarySearchTree bst = new BinarySearchTree();
+		createNew(binaryTree.rootNode, 4,7, bst);
+		System.out.println("new tree data is : ");
+		bst.printData();
 	}
 
+
+	private static BinarySearchTree createNew(Node root, int min, int max, BinarySearchTree bst){
+		if(root!=null) {
+			if (root.data >= min && root.data <= max) {
+				bst.add(root.data);
+			}
+			if (root.data >= min) {
+				createNew(root.getLeftNode(), min, max, bst);
+			}
+
+			if (root.data < max) {
+				createNew(root.getRightNode(), min, max, bst);
+			}
+		}
+			return bst;
+	}
 }

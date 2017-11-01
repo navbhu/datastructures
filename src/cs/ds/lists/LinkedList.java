@@ -86,8 +86,28 @@ public class LinkedList {
 
 		for(int i=0; i < nodeList.getLength(); i++) {
 			System.out.println("data in position " + i +"  is : " + nodeList.getData(i));
-		}		
+		}
+
+		Node head = swapNodes(nodeList.getHead());
+
+        while(head !=null){
+            System.out.print(head.getData()+" ");
+            head = head.getNextNode();
+        }
 	}
+
+	private static Node swapNodes(Node head){
+        if(head == null || head.getNextNode() == null) {
+            return head;
+        }
+        Node temp = head;
+        Node second = head.getNextNode();
+        Node newHead = second.getNextNode();
+        head = second;
+        head.setNextNode(temp);
+        temp.setNextNode(swapNodes(newHead));
+        return head;
+    }
 }
 
 
